@@ -43,7 +43,7 @@ mkdir -p $BACKUP_DEST
 echo "backing up sqlite db"
 sqlite3 $BACKUP_SOURCE/db.sqlite3 ".backup '$BACKUP_DEST/db.sqlite3"
 echo "backing up attachments"
-[[ -d $BACKUP_SOURCE/attachments ]] && rsync -r $BACKUP_SOURCE/attachments $BACKUP_DEST/
+[[ -d $BACKUP_SOURCE/attachments ]] && cp -a $BACKUP_SOURCE/attachments $BACKUP_DEST/
 echo "backing up configuration and keys"
 cp -a $BACKUP_SOURCE/config.json $BACKUP_DEST/
 cp -a $BACKUP_SOURCE/rsa_key* $BACKUP_DEST/
