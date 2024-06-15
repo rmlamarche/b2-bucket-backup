@@ -21,14 +21,14 @@ if [ -z "${CLEAN_DAYS}" ]; then
 fi
 
 BACKUP_LOCATION=/opt/b2-bucket-backup
-DATE_DIR=$(date '+%Y%m%d')
+DATE_DIR=$(date -Iminutes)
 BACKUP_DEST="${BACKUP_LOCATION}/${DATE_DIR}"
 
 echo "### Begin backup $DATE_DIR"
 echo "using backup source $BACKUP_SOURCE"
 echo "keeping $CLEAN_DAYS days of backups in $BACKUP_LOCATION (if disk is persisted)"
 b2 account get
-mkdir -p ${BACKUP_DEST}
+mkdir -p $BACKUP_LOCATION
 
 # remove backups older than CLEAN_DAYS days
 echo "removing backups older than $CLEAN_DAYS days"
