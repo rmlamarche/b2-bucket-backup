@@ -32,11 +32,19 @@ def main():
         with open(tmp_file_path, 'wb') as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
+    
     print('Wrote backup to tmp file, uploading to b2')
     cmd = ['b2', 'account', 'get']
-    subprocess.run(cmd)
+    res = subprocess.run(cmd, capture_output=True)
+    if res.returncode != 0:
+        print("ERROR: could not get b2 account using provided credentials. Check env vars")
     cmd = ['b2', 'file', 'upload', B2_BUCKET, tmp_file_path, backup_to_download, '--no-progress']
-    subprocess.run(cmd)
+    res = subprocess.run(cmd, capture_output=True)
+    if res.returncode != 0:
+        print("ERROR: failed to upload file to b2")
+    
+    print("deleting backup from mealie")
+    r = requests.delete("{}{}".format(BASE_URL, "/api/admin/backups.{}".format(backup_to_download)), headers=auth_headers)
 
 if __name__ == '__main__':
     main()
