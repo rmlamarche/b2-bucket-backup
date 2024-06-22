@@ -44,7 +44,7 @@ def main():
         print("ERROR: failed to upload file to b2")
     
     print("deleting backup from mealie")
-    r = requests.delete("{}{}".format(BASE_URL, "/api/admin/backups.{}".format(backup_to_download)), headers=auth_headers)
+    r = requests.delete("{}{}".format(BASE_URL, "/api/admin/backups/{}".format(backup_to_download)), headers=auth_headers)
 
 if __name__ == '__main__':
     main()
