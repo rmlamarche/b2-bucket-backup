@@ -35,11 +35,11 @@ def main():
     
     print('Wrote backup to tmp file, uploading to b2')
     cmd = ['b2', 'account', 'get']
-    res = subprocess.run(cmd, stdout=subprocess.STDOUT, stderr=subprocess.STDOUT)
+    res = subprocess.run(cmd)
     if res.returncode != 0:
         print("ERROR: could not get b2 account using provided credentials. Check env vars")
     cmd = ['b2', 'file', 'upload', B2_BUCKET, tmp_file_path, backup_to_download, '--no-progress']
-    res = subprocess.run(cmd, stdout=subprocess.STDOUT, stderr=subprocess.STDOUT)
+    res = subprocess.run(cmd)
     if res.returncode != 0:
         print("ERROR: failed to upload file to b2")
     
