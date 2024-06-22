@@ -1,6 +1,0 @@
-name: 'b2-bucket-backup'
-description: 'Perform a backup of vaultwarden sqlite database and upload it to backblaze b2 bucket storage'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  
