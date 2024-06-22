@@ -18,8 +18,6 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
 
 
 jobs:
@@ -36,9 +34,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./dockerfiles/Dockerfile.vaultwarden
-            image: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}-vaultwarden
+            image: ghcr.io/${{ github.repository }}-vaultwarden
           - dockerfile: ./dockerfiles/Dockerfile.mealie
-            image: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}-mealie
+            image: ghcr.io/${{ github.repository }}-mealie
 
     steps:
       - name: Checkout repository
