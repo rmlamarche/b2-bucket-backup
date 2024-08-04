@@ -4,11 +4,12 @@ import requests
 import subprocess
 
 def main():
-    API_TOKEN = os.environ.get('MEALIE_API_TOKEN')
-    BASE_URL = os.environ.get('MEALIE_BASE_URL')
-    B2_APPLICATION_KEY_ID = os.environ.get('B2_APPLICATION_KEY_ID')
-    B2_APPLICATION_KEY = os.environ.get('B2_APPLICATION_KEY')
-    B2_BUCKET = os.environ.get('B2_BUCKET')
+    API_TOKEN = os.getenv('MEALIE_API_TOKEN')
+    BASE_URL = os.getenv('MEALIE_BASE_URL')
+    B2_APPLICATION_KEY_ID = os.getenv('B2_APPLICATION_KEY_ID')
+    B2_APPLICATION_KEY = os.getenv('B2_APPLICATION_KEY')
+    B2_BUCKET = os.getenv('B2_BUCKET')
+    BACKUP_DEST = os.getenv('BACKUP_DEST', '/opt/b2-bucket-backup')
 
     auth_headers = {
         "Authorization": "Bearer {}".format(API_TOKEN)
@@ -26,7 +27,7 @@ def main():
     print('Downloading backup: {}'.format(backup_to_download))
     r = requests.get("{}{}".format(BASE_URL, "/api/admin/backups/{}".format(backup_to_download)), headers=auth_headers)
     fileToken = r.json()['fileToken']
-    tmp_file_path = '/tmp/{}.zip'.format(backup_to_download)
+    tmp_file_path = '{}/{}.zip'.format(BACKUP_DEST, backup_to_download)
     with requests.get("{}{}".format(BASE_URL, "/api/utils/download?token={}".format(fileToken)), headers=auth_headers, stream=True) as r:
         r.raise_for_status()
         with open(tmp_file_path, 'wb') as f:
