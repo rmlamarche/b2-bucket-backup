@@ -37,6 +37,8 @@ jobs:
             image: ghcr.io/${{ github.repository }}-vaultwarden
           - dockerfile: ./dockerfiles/Dockerfile.mealie
             image: ghcr.io/${{ github.repository }}-mealie
+          - dockerfile: ./dockerfiles/Dockerfile.sqlite-generic
+            image: ghcr.io/${{ github.repository }}-sqlite-generic
 
     steps:
       - name: Checkout repository
