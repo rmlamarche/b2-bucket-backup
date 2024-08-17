@@ -21,6 +21,7 @@ if [ -z "${CLEAN_DAYS}" ]; then
 fi
 
 BACKUP_LOCATION=/opt/b2-bucket-backup
+TMPDIR=$BACKUP_LOCATION/tmp
 DATE_DIR=$(date -Iminutes)
 BACKUP_DEST="${BACKUP_LOCATION}/${DATE_DIR}"
 
@@ -29,6 +30,8 @@ echo "using backup source $BACKUP_SOURCE"
 echo "keeping $CLEAN_DAYS days of backups in $BACKUP_LOCATION (if disk is persisted)"
 b2 account get
 mkdir -p $BACKUP_LOCATION
+rm -rf $TMPDIR
+mkdir -p $TMPDIR
 
 # remove backups older than CLEAN_DAYS days
 echo "removing backups older than $CLEAN_DAYS days"
@@ -49,11 +52,11 @@ cp -a $BACKUP_SOURCE/config.json $BACKUP_DEST/
 cp -a $BACKUP_SOURCE/rsa_key* $BACKUP_DEST/
 
 # backup to remote
-echo "creating temp archive in /tmp/vw-backup-$DATE_DIR.tar.gz"
-tar -czf /tmp/vw-backup-$DATE_DIR.tar.gz -C $BACKUP_LOCATION $DATE_DIR
+echo "creating temp archive in $TMPDIR/vw-backup-$DATE_DIR.tar.gz"
+tar -czf $TMPDIR/vw-backup-$DATE_DIR.tar.gz -C $BACKUP_LOCATION $DATE_DIR
 echo "pushing to b2"
-b2 file upload $B2_BUCKET /tmp/vw-backup-$DATE_DIR.tar.gz vw-backup-$DATE_DIR.tar.gz --no-progress
+b2 file upload $B2_BUCKET $TMPDIR/vw-backup-$DATE_DIR.tar.gz vw-backup-$DATE_DIR.tar.gz --no-progress
 echo "removing temp archive"
-rm -f /tmp/vw-backup-$DATE_DIR.tar.gz
+rm -f $TMPDIR/vw-backup-$DATE_DIR.tar.gz
 
 echo "### Done backup $DATE_DIR"
