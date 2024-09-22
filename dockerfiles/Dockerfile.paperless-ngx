@@ -1,0 +1,8 @@
+FROM alpine
+
+RUN apk add --no-cache bash python3 py3-pip
+RUN pip3 install b2 --upgrade --ignore-installed --break-system-packages
+
+ADD ../src/paperless-ngx/backup.py /
+
+ENTRYPOINT [ "/backup.py" ]

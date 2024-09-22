@@ -39,6 +39,8 @@ jobs:
             image: ghcr.io/${{ github.repository }}-mealie
           - dockerfile: ./dockerfiles/Dockerfile.sqlite-generic
             image: ghcr.io/${{ github.repository }}-sqlite-generic
+          - dockerfile: ./dockerfiles/Dockerfile.paperless-ngx
+            image: ghcr.io/${{ github.repository }}-paperless-ngx
 
     steps:
       - name: Checkout repository
