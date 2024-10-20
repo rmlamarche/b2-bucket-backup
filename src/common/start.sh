@@ -25,12 +25,12 @@ if [ $RESULT -ne 0 ]; then
         echo "ERROR: backup failed, no NTFY_URL set. Set NTFY_URL=https://ntfy.sh/my-topic to receive alerts."
         exit $RESULT
     fi
-    send_ntfy_failure $TIME_ELAPSED
+    send_ntfy_failure "${TIME_ELAPSED}"
     exit $RESULT
 else
     if [ -z "${NTFY_URL}" ]; then
         exit 0
     fi
-    send_ntfy_success $TIME_ELAPSED
+    send_ntfy_success "${TIME_ELAPSED}"
     exit $RESULT
 fi
