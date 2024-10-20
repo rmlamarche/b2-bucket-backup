@@ -23,12 +23,14 @@ TIME_ELAPSED="(took $((DURATION / 60))m $((DURATION % 60))s)"
 if [ $RESULT -ne 0 ]; then
     if [ -z "${NTFY_URL}" ]; then
         echo "ERROR: backup failed, no NTFY_URL set. Set NTFY_URL=https://ntfy.sh/my-topic to receive alerts."
-        exit 1
+        exit $RESULT
     fi
     send_ntfy_failure $TIME_ELAPSED
+    exit $RESULT
 else
     if [ -z "${NTFY_URL}" ]; then
         exit 0
     fi
     send_ntfy_success $TIME_ELAPSED
+    exit $RESULT
 fi
