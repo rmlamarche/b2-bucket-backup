@@ -5,8 +5,9 @@ RUN pip3 install b2 --upgrade --ignore-installed --break-system-packages
 RUN mkdir /app
 WORKDIR /app
 
-ADD ../src/sqlite-generic/backup.sh /app/
-ADD ../src/common /app/
+COPY ../src/sqlite-generic/backup.sh /app/
+RUN mkdir /app/common
+COPY ../src/common /app/common/
 
 ENV NTFY_SUCCESS_TITLE="sqlite-generic backup succeeded"
 ENV NTFY_SUCCESS_MESSAGE="sqlite-generic backup succeeded"
