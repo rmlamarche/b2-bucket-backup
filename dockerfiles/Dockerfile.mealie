@@ -10,10 +10,8 @@ RUN mkdir common
 COPY ../src/common ./common
 
 ENV NTFY_SUCCESS_TITLE="mealie backup succeeded"
-ENV NTFY_SUCCESS_MESSAGE="mealie backup succeeded"
 ENV NTFY_SUCCESS_PRIORITY="1"
 ENV NTFY_FAILURE_TITLE="mealie backup failed"
-ENV NTFY_FAILURE_MESSAGE="mealie backup failed"
 ENV NTFY_FAILURE_PRIORITY="5"
 
 ENTRYPOINT [ "./common/start.sh" ]

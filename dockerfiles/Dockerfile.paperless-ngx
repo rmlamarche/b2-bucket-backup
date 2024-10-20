@@ -10,10 +10,8 @@ RUN mkdir common
 COPY ../src/common ./common
 
 ENV NTFY_SUCCESS_TITLE="paperless-ngx backup succeeded"
-ENV NTFY_SUCCESS_MESSAGE="paperless-ngx backup succeeded"
 ENV NTFY_SUCCESS_PRIORITY="1"
 ENV NTFY_FAILURE_TITLE="paperless-ngx backup failed"
-ENV NTFY_FAILURE_MESSAGE="paperless-ngx backup failed"
 ENV NTFY_FAILURE_PRIORITY="5"
 
 ENTRYPOINT [ "./common/start.sh" ]

@@ -10,10 +10,8 @@ RUN mkdir common
 COPY ../src/common ./common
 
 ENV NTFY_SUCCESS_TITLE="vaultwarden backup succeeded"
-ENV NTFY_SUCCESS_MESSAGE="vaultwarden backup succeeded"
 ENV NTFY_SUCCESS_PRIORITY="1"
 ENV NTFY_FAILURE_TITLE="vaultwarden backup failed"
-ENV NTFY_FAILURE_MESSAGE="vaultwarden backup failed"
 ENV NTFY_FAILURE_PRIORITY="5"
 
 ENTRYPOINT [ "./common/start.sh" ]
