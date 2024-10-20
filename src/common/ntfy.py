@@ -12,7 +12,7 @@ def send_ntfy(url, message, title, priority, tags):
     if tags is not None:
         ntfy_headers['Tags'] = tags
 
-    r = requests.post(url, headers=ntfy_headers, message)
+    r = requests.post(url, headers=ntfy_headers, data=message)
     print(r.json())
 
 def main():
