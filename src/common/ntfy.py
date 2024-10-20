@@ -17,8 +17,8 @@ def send_ntfy(url, message, title, priority, tags):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-u', '--url', type=str, required=True, 'URL with topic (e.g. ntfy.sh/my-alerts)')
-    parser.add_argument('-m', '--message', type=str, 'notification body text')
+    parser.add_argument('-u', '--url', type=str, required=True, description='URL with topic (e.g. ntfy.sh/my-alerts)')
+    parser.add_argument('-m', '--message', type=str, description='notification body text')
     parser.add_argument('-T', '--title', type=str, description='notification title')
     parser.add_argument('-p', '--priority', type=int, choices=[1, 2, 3, 4, 5], description='notification priority')
     parser.add_argument('-t', '--tags', type=str, description='comma separated list of tags')
