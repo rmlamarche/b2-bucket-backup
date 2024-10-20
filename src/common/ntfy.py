@@ -8,7 +8,7 @@ def send_ntfy(url, message, title, priority, tags):
     if title is not None:
         ntfy_headers['Title'] = title
     if priority is not None:
-        ntfy_headers['Priority'] = priority
+        ntfy_headers['Priority'] = str(priority)
     if tags is not None:
         ntfy_headers['Tags'] = tags
 
@@ -17,7 +17,7 @@ def send_ntfy(url, message, title, priority, tags):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-u', '--url', type=str, required=True, help='URL with topic (e.g. ntfy.sh/my-alerts)')
+    parser.add_argument('-u', '--url', type=str, required=True, help='URL with topic (e.g. https://ntfy.sh/my-alerts)')
     parser.add_argument('-m', '--message', type=str, help='notification body text')
     parser.add_argument('-T', '--title', type=str, help='notification title')
     parser.add_argument('-p', '--priority', type=int, choices=[1, 2, 3, 4, 5], help='notification priority')
