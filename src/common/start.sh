@@ -3,11 +3,11 @@
 
 # helper function to send ntfy push notification on success
 function send_ntfy_success {
-    /bbb/common/ntfy.py -u $NTFY_URL -T $NTFY_SUCCESS_TITLE -m $NTFY_SUCCESS_MESSAGE -p $NTFY_SUCCESS_PRIORITY
+    /bbb/common/ntfy.py -u "${NTFY_URL}" -T "${NTFY_SUCCESS_TITLE}" -m "${NTFY_SUCCESS_MESSAGE}" -p "${NTFY_SUCCESS_PRIORITY}"
 }
 # helper function to send ntfy push notification on failure
 function send_ntfy_failure {
-    /bbb/common/ntfy.py -u $NTFY_URL -T $NTFY_FAILURE_TITLE -m $NTFY_FAILURE_MESSAGE -p $NTFY_FAILURE_PRIORITY
+    /bbb/common/ntfy.py -u "${NTFY_URL}" -T "${NTFY_FAILURE_TITLE}" -m "${NTFY_FAILURE_MESSAGE}" -p "${NTFY_FAILURE_PRIORITY}"
 }
 
 # Run supplied backup script
