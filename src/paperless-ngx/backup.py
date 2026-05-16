@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import datetime
 import os
-import requests
 import subprocess
 
 def main():
@@ -32,7 +31,7 @@ def main():
     if res.returncode != 0:
         print('ERROR: failed to copy {} to {}'.format(cp_src, cp_dst))
     print('Archive copied')
-    cmd = ['kubectl', '-n', PAPERLESS_NGX_NAMESPACE, 'exec', PAPERLESS_NGX_POD, '--', 'rm', '-f', cp_src]
+    cmd = ['kubectl', '-n', PAPERLESS_NGX_NAMESPACE, 'exec', PAPERLESS_NGX_POD, '--', 'rm', '-f', '../export/{}'.format(zip_file_name)]
     res = subprocess.run(cmd)
     if res.returncode != 0:
         print('ERROR: failed cleanup on exported zip file {}'.format(zip_file_name))

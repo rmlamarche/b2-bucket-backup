@@ -41,6 +41,8 @@ jobs:
             image: ghcr.io/${{ github.repository }}-sqlite-generic
           - dockerfile: ./dockerfiles/Dockerfile.paperless-ngx
             image: ghcr.io/${{ github.repository }}-paperless-ngx
+          - dockerfile: ./dockerfiles/Dockerfile.lubelogger
+            image: ghcr.io/${{ github.repository }}-lubelogger
 
     steps:
       - name: Checkout repository
