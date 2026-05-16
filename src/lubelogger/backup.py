@@ -28,7 +28,7 @@ def main():
 
     print('Collecting lubelogger attachments in {} pod in {} namespace'.format(LUBELOGGER_POD, LUBELOGGER_NAMESPACE))
     archive_name_file_name = '/tmp/{}.tar.gz'.format(archive_name)
-    cmd = ['kubectl', '-n', LUBELOGGER_NAMESPACE, 'exec', LUBELOGGER_POD, '--', '/usr/bin/tar', '-czf', archive_name_file_name, LUBELOGGER_DATA_DIRS]
+    cmd = ['kubectl', '-n', LUBELOGGER_NAMESPACE, 'exec', LUBELOGGER_POD, '--', '/usr/bin/tar', '-czf', archive_name_file_name, *LUBELOGGER_DATA_DIRS]
     res = subprocess.run(cmd)
     if res.returncode != 0:
         print('ERROR: failed to tar lubelogger data dirs')
