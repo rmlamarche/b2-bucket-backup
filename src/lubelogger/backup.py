@@ -62,7 +62,7 @@ def main():
 
     print('Creating lubelogger backup bundle')
     bundle_file_name = '{}/{}-bundle.tar'.format(BACKUP_DEST, archive_name)
-    cmd = ['/usr/bin/tar', '-cf', bundle_file_name, cp_dst, pg_cp_dst]
+    cmd = ['/bin/tar', '-cf', bundle_file_name, cp_dst, pg_cp_dst]
     res = subprocess.run(cmd)
     print('Created bundle {}'.format(bundle_file_name))
 
