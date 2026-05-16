@@ -2,6 +2,7 @@
 import os
 import requests
 import subprocess
+import sys
 
 def main():
     API_TOKEN = os.getenv('MEALIE_API_TOKEN')
@@ -39,10 +40,12 @@ def main():
     res = subprocess.run(cmd)
     if res.returncode != 0:
         print("ERROR: could not get b2 account using provided credentials. Check env vars")
+        sys.exit(1)
     cmd = ['b2', 'file', 'upload', B2_BUCKET, tmp_file_path, backup_to_download, '--no-progress']
     res = subprocess.run(cmd)
     if res.returncode != 0:
         print("ERROR: failed to upload file to b2")
+        sys.exit(1)
     
     print("deleting backup from mealie")
     r = requests.delete("{}{}".format(BASE_URL, "/api/admin/backups/{}".format(backup_to_download)), headers=auth_headers)
